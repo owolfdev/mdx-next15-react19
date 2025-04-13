@@ -1,9 +1,5 @@
 # 📝 Next.js 15 MDX Blog
 
-[GitHub repo](https://github.com/owolfdev/mdx-next15-react19)
-
-[Deployed app](https://mdx-next15-react19.vercel.app/)
-
 A fast, modern, and accessible blog platform built with:
 
 - **Next.js 15 App Router**
@@ -11,6 +7,10 @@ A fast, modern, and accessible blog platform built with:
 - **React 19 with Server Components (RSC)**
 - **Tailwind CSS for styling**
 - **File-based content system in `/content/posts`**
+
+[GitHub repo](https://github.com/owolfdev/mdx-next15-react19)
+
+[Deployed app](https://mdx-next15-react19.vercel.app/)
 
 ---
 
