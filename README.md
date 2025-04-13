@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📝 Next.js 15 MDX Blog
 
-## Getting Started
+A fast, modern, and accessible blog platform built with:
 
-First, run the development server:
+- **Next.js 15 App Router**
+- **MDX-based content authoring**
+- **React 19 with Server Components (RSC)**
+- **Tailwind CSS for styling**
+- **File-based content system in `/content/posts`**
+
+---
+
+## ✨ Features
+
+- 📄 **MDX-powered posts** – write interactive markdown with React components
+- 📦 **App Router support** – modern routing, layouts, and loading patterns
+- 🧱 **Custom `useMDXComponents`** – style your headings, paragraphs, and code blocks consistently
+- 💡 **Async `params` and metadata parsing** – compatible with latest Next.js 15 behavior
+- 🌓 **Dark mode friendly** – via `dark:prose-invert` styling
+- 📁 **File-based content** – add `.mdx` files to `content/posts` to create pages
+- ✅ **Error handling** – 404s, missing metadata, and broken posts are gracefully handled
+
+---
+
+## 📂 Project Structure
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+/app
+  /blog
+    [slug]/page.tsx      # Dynamic route for individual posts
+    not-found.tsx        # Custom 404 page
+    page.tsx             # Blog index (blog roll)
+  layout.tsx             # Shared layout
+/content
+  /posts                 # Your MDX files live here
+/lib
+  /actions/get-posts.ts  # Reads + parses metadata from MDX files
+/app/_actions/mdx.ts     # Core MDX file logic
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+````
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠 How to Add a New Post
 
-## Learn More
+1. Create a file in `content/posts/` with a `.mdx` extension.
+2. At the top, export your metadata:
 
-To learn more about Next.js, take a look at the following resources:
+```tsx
+export const metadata = {
+  title: "Your Post Title",
+  publishDate: "2025-04-14",
+  description: "A short summary of the post.",
+};
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Write your content using markdown and React components!
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🧪 Development
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+pnpm install       # or yarn / npm
+pnpm dev           # run locally at http://localhost:3000
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📦 Tech Stack
+
+- [Next.js 15 (App Router)](https://nextjs.org/docs/app)
+- [MDX](https://mdxjs.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [React 19](https://react.dev/)
+- TypeScript, Server Components, Edge-ready
+
+---
+
+## ✅ Status
+
+💥 **Actively built** — focusing on performance, authoring experience, and stability for production deployment.
+
+---
+
+## 🧠 Credits
+
+Built with ❤️ by O. Wolfson with significant help from ChatGPT Code Copilot
+````
