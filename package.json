@@ -13,6 +13,7 @@
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
     "@next/mdx": "^15.2.5",
+    "@radix-ui/react-alert-dialog": "^1.1.7",
     "@radix-ui/react-slot": "^1.2.0",
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.49.4",
