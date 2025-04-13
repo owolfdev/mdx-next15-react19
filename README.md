@@ -38,8 +38,6 @@ A fast, modern, and accessible blog platform built with:
 /app/_actions/mdx.ts     # Core MDX file logic
 ```
 
-````
-
 ---
 
 ## 🛠 How to Add a New Post
@@ -87,4 +85,3 @@ pnpm dev           # run locally at http://localhost:3000
 ## 🧠 Credits
 
 Built with ❤️ by O. Wolfson with significant help from ChatGPT Code Copilot
-````
