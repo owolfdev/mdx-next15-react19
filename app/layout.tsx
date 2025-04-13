@@ -37,7 +37,10 @@ export default function RootLayout({
           {children}
         </div>
         <footer className="text-center text-sm text-gray-500 py-8">
-          Made with Next.js 15 and React 19
+          Made with Next.js 15 and React 19 - By O. Wolfson for{" "}
+          <Link className="underline text-pink-600" href="https://mdxblog.io">
+            MDXBlog.io
+          </Link>
         </footer>
       </body>
     </html>
