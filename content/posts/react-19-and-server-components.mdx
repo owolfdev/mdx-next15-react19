@@ -1,0 +1,127 @@
+export const metadata = {
+  title: "React 19 and Server Components",
+  publishDate: "2025-04-13",
+  description:
+    "Integrating React 19's Server Components with MDX in Next.js 15.",
+};
+
+## ⚛️ React 19 and Server Components
+
+React 19 brings improved support for Server Components (RSC), and it's fully compatible with `.mdx` files rendered in Server Components. This integration allows for seamless inclusion of MDX content within your server-rendered pages.
+
+---
+
+## 🔄 Breaking Change in Next.js 15: Async Props
+
+With the release of Next.js 15, there's a significant shift in how certain request-specific data is accessed. APIs such as `params`, `searchParams`, `cookies`, and `headers` are now asynchronous. This means they return Promises and must be awaited, even within Server Components.
+
+### ❗ Why This Matters
+
+Previously, in Next.js 14 and earlier, these APIs were synchronous. For example:
+
+```tsx
+// Next.js 14
+export default function Page({ params }: { params: { slug: string } }) {
+  const slug = params.slug;
+  return <div>Post: {slug}</div>;
+}
+```
+
+In Next.js 15, attempting to access `params` synchronously will result in errors because `params` is now a Promise:
+
+```tsx
+// ❌ This will cause an error in Next.js 15
+export default function Page({ params }: { params: { slug: string } }) {
+  const slug = params.slug; // Error: Cannot read property 'slug' of undefined
+  return <div>Post: {slug}</div>;
+}
+```
+
+### ✅ Correct Usage in Next.js 15
+
+To adapt to this change, you should await the `params` object:
+
+```tsx
+// Next.js 15
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  return <div>Post: {slug}</div>;
+}
+```
+
+This pattern ensures that you're correctly handling the asynchronous nature of these APIs.
+
+---
+
+## 🧩 Key Patterns
+
+When working with MDX content and custom components, it's essential to maintain consistent styling and structure. Here's how you can achieve that:
+
+### 🖋️ Using `prose` for Layout
+
+Wrap your MDX content within a styled `<article>` using Tailwind's `prose` class to ensure consistent typography:
+
+```tsx
+<article className="prose dark:prose-invert max-w-3xl mx-auto py-10">
+  <Content />
+</article>
+```
+
+This setup provides a clean and readable layout for your content.
+
+### 🧱 Customizing Components with `useMDXComponents`
+
+To map custom components like `<h1>` or `<Button>`, use the `useMDXComponents` hook:
+
+```tsx
+import type { MDXComponents } from "mdx/types";
+import { Button } from "@/components/ui/button";
+
+export function useMDXComponents(
+  components: MDXComponents = {}
+): MDXComponents {
+  return {
+    h1: (props) => <h1 className="text-6xl" {...props} />,
+    Button: (props) => <Button {...props} />,
+    ...components,
+  };
+}
+```
+
+This approach allows you to define consistent styling and behavior for your MDX components across your application.
+
+---
+
+## 🛠️ Migration Tips
+
+To facilitate the transition to Next.js 15, consider the following:
+
+- **Codemod Tool**: Utilize the official codemod to automate the migration of synchronous APIs to their asynchronous counterparts:
+
+  ```bash
+  npx @next/codemod@canary next-async-request-api .
+  ```
+
+- **TypeScript Adjustments**: Update your TypeScript types to reflect the asynchronous nature of these APIs. For example, define `params` as a `Promise`:
+
+  ```tsx
+  interface Props {
+    params: Promise<{ slug: string }>;
+  }
+  ```
+
+- **Temporary Workarounds**: While not recommended for long-term use, you can temporarily cast synchronous access to suppress errors:
+
+  ```tsx
+  const cookieStore = cookies() as unknown as UnsafeUnwrappedCookies;
+  ```
+
+  However, this approach will trigger warnings and should be refactored to use the asynchronous pattern promptly.
+
+---
+
+By understanding and adapting to these changes, you can ensure that your application remains compatible with Next.js 15 and leverages the latest features and improvements.

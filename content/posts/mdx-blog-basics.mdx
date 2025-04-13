@@ -1,0 +1,50 @@
+export const metadata = {
+  title: "MDX Blog with Next.js App Router",
+  publishDate: "2025-04-12",
+  description:
+    "How to build a markdown-powered blog using MDX and the App Router.",
+};
+
+### Using MDX with Next.js 15, React 19, Tailwind, and ShadCN
+
+**MDX** lets you write Markdown content enhanced with JSX. It’s ideal for content-driven apps where you want the power of React inside rich text — perfect for blogs, documentation, and interactive pages.
+
+---
+
+## ✅ App Router + MDX
+
+Next.js 15 with the App Router supports MDX smoothly.
+
+To load an MDX file dynamically:
+
+```tsx
+const post = await import(`@/content/posts/${slug}.mdx`);
+```
+
+Then render it using `@/next/mdx` compiled output. Use `useMDXComponents` to register any global components you want available in all MDX files.
+
+---
+
+## 🧪 Example: ShadCN Button in MDX
+
+Because we’ve already registered the ShadCN `Button` in our `useMDXComponents` config, we can use it in MDX **without needing to import it**:
+
+```mdx
+## Example with globally registered Button
+
+<Button variant="outline">Click me</Button>
+```
+
+Alternatively, you can import it manually if you prefer:
+
+```mdx
+import { Button } from "@/components/ui/button";
+
+## Example with local import
+
+<Button variant="default">I was imported manually</Button>
+```
+
+Both approaches render the same styled component — choose based on your project's organization or preference.
+
+-

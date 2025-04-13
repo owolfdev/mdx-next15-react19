@@ -1,0 +1,66 @@
+export const metadata = {
+  title: "Layout and Styling in MDX Posts",
+  publishDate: "2025-04-14",
+  description: "How to style MDX content and use the prose class effectively.",
+};
+
+### 📐 Layout Wrappers for MDX Content
+
+To keep your MDX content visually consistent with the rest of your site, wrap it in a styled `<article>` using Tailwind’s `prose` utilities. This gives you clean typographic defaults, while still allowing full control through your MDX component overrides.
+
+```tsx
+<article className="prose dark:prose-invert max-w-3xl mx-auto py-10">
+  <Content />
+</article>
+```
+
+This wrapper ensures your MDX content is readable, centered, and styled consistently across light and dark themes.
+
+---
+
+### 🌬️ Breathing Room & Vertical Rhythm
+
+While `prose` handles default spacing, JSX components you define in `useMDXComponents` need intentional spacing to maintain flow—especially for headings and paragraphs.
+
+Use `mt-*` Tailwind utilities to restore vertical rhythm:
+
+```tsx
+h2: (props) => <h2 className="mt-6 text-4xl" {...props} />,
+```
+
+Here’s an example of a well-structured `useMDXComponents` config:
+
+```tsx
+import type { MDXComponents } from "mdx/types";
+import { Button } from "@/components/ui/button";
+
+export function useMDXComponents(
+  components: MDXComponents = {}
+): MDXComponents {
+  return {
+    h1: (props) => <h1 className="mt-10 text-6xl font-bold" {...props} />,
+    h2: (props) => <h2 className="mt-8 text-4xl font-bold" {...props} />,
+    h3: (props) => <h3 className="mt-6 text-2xl font-bold" {...props} />,
+    h4: (props) => <h4 className="mt-5 text-xl font-bold" {...props} />,
+    h5: (props) => <h5 className="mt-4 text-lg font-bold" {...props} />,
+    h6: (props) => <h6 className="mt-3 text-base font-bold" {...props} />,
+    p: (props) => <p className="mt-4 text-base leading-relaxed" {...props} />,
+    div: (props) => <div className="mt-4" {...props} />,
+    hr: (props) => <hr className="my-4" {...props} />,
+    code: (props) => (
+      <code
+        className="px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-sm font-mono text-pink-600"
+        {...props}
+      />
+    ),
+    pre: (props) => (
+      <pre
+        className="my-6 overflow-x-auto rounded bg-zinc-100 dark:bg-zinc-900 p-4 text-sm leading-relaxed"
+        {...props}
+      />
+    ),
+    Button: (props) => <Button {...props} />,
+    ...components,
+  };
+}
+```
