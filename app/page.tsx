@@ -7,7 +7,7 @@ export default async function BlogPage() {
 
   return (
     <div className="prose dark:prose-invert sm:min-w-3xl max-w-3xl mx-auto  space-y-8">
-      <h1 className="text-6xl font-black pb-8">MDX Blog</h1>
+      <h1 className="text-6xl font-black pb-8">MDX Blog Next15 React 19</h1>
       {posts.map(({ slug, metadata }) => (
         <article key={slug} className="border-b pb-6">
           <h2 className="text-2xl font-black">
